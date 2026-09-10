@@ -1,0 +1,21 @@
+const menuToggle = document.querySelector(".menu-toggle");
+const navMenu = document.querySelector(".nav-menu");
+
+menuToggle.addEventListener("click", () => {
+  navMenu.classList.toggle("active");
+});
+
+document.querySelectorAll(".nav-menu a").forEach(link => {
+  link.addEventListener("click", () => navMenu.classList.remove("active"));
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add("visible");
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+document.getElementById("copyright").textContent =
+  `© ${new Date().getFullYear()} Nama Anda. All Rights Reserved.`;
